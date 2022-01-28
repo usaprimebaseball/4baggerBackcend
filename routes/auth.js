@@ -1,6 +1,6 @@
 import express from "express";
 
-import { signin, directorSignUp, playerSignUp, teamSignUp, otherSignUp } from "../controllers/user.js"
+import { signin, directorSignUp, playerSignUp, teamSignUp, otherSignUp } from "../controllers/auth.js"
 const router = express.Router();
 
 router.post('/signin', signin);
