@@ -8,55 +8,18 @@ export const signin = async (req, res) => {
     const { email, password } = req.body;
     
     try {
-        const existingDirector = await Director.findOne({ email });
-        const existingPlayer = await Player.findOne({ email });
-        const existingTeam = await Team.findOne({ email });
-        const existingOther = await Other.findOne({ email });
-
+        const existingUser = await Director.findOne({ email });
         // Check for Existing Users
-        if (!existingDirector) return res.status(404).json({ message: "User doesn't exist."})
+        if (!existingUser) return res.status(404).json({ message: "User doesn't exist."})
 
-        const isDirPasswordCorrect = await bcrypt.compare(password, existingDirector.password);
+        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
-        if (!isDirPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
+        if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
 
-        const dirToken = jwt.sign({ email: existingDirector.email, id: existingDirector._id }, secret, { expiresIn: "1h" });
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, secret, { expiresIn: "1h" });
 
-        res.status(200).json({ result: existingDirector, dirToken });
+        res.status(200).json({ result: existingUser, token });
 
-        // Check for Existing Users
-        if (!existingPlayer) return res.status(404).json({ message: "User doesn't exist."})
-
-        const isPlPasswordCorrect = await bcrypt.compare(password, existingPlayer.password);
-
-        if (!isPlPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
-
-        const playerToken = jwt.sign({ email: existingPlayer.email, id: existingPlayer._id }, secret, { expiresIn: "1h" });
-
-        res.status(200).json({ result: existingPlayer, playerToken });
-
-        // Check for Existing Users
-        if (!existingTeam) return res.status(404).json({ message: "User doesn't exist."})
-
-        const isTeamPasswordCorrect = await bcrypt.compare(password, existingTeam.password);
-
-        if (!isTeamPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
-
-        const teamToken = jwt.sign({ email: existingTeam.email, id: existingTeam._id }, secret, { expiresIn: "1h" });
-
-        res.status(200).json({ result: existingTeam, teamToken });
-
-        // Check for Existing Users
-        if (!existingOther) return res.status(404).json({ message: "User doesn't exist."})
-
-        const isOtherPasswordCorrect = await bcrypt.compare(password, existingOther.password);
-
-        if (!isOtherPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
-
-        const otherToken = jwt.sign({ email: existingOther.email, id: existingOther._id }, secret, { expiresIn: "1h" });
-
-        res.status(200).json({ result: existingOther, otherToken });
-        
     } catch (error) {
         res.status(500).json({ message: "Something went wrong!"});
     }

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-
+import jwt from "jsonwebtoken";
+import { secret } from "../secret.js";
 import { Director, Player, Team, Other } from "../models/users.js";
 
 export const updateDirector = async (req, res) => {
@@ -11,7 +12,9 @@ export const updateDirector = async (req, res) => {
 
     const updatedDirector = await Director.findByIdAndUpdate(_id, info, { new: true });
 
-    res.json(updatedDirector);
+    const token = jwt.sign({ email: updatedDirector.email, id: updatedDirector._id }, secret, { expiresIn: "1h" });
+
+    res.status(200).json({ result: updatedDirector, token });
 
 }
 
@@ -24,8 +27,9 @@ export const updatePlayer = async (req, res) => {
     
     const updatedPlayer = await Player.findByIdAndUpdate(_id, info, { new: true });
 
-    res.json(updatedPlayer);
+    const token = jwt.sign({ email: updatedPlayer.email, id: updatedPlayer._id }, secret, { expiresIn: "1h" });
 
+    res.status(200).json({ result: updatedPlayer, token });
 }
 
 export const updateTeam = async (req, res) => {
@@ -37,8 +41,9 @@ export const updateTeam = async (req, res) => {
     
     const updatedTeam = await Team.findByIdAndUpdate(_id, info, { new: true });
 
-    res.json(updatedTeam);
+    const token = jwt.sign({ email: updatedTeam.email, id: updatedTeam._id }, secret, { expiresIn: "1h" });
 
+    res.status(200).json({ result: updatedTeam, token });
 }
 
 export const updateOther = async (req, res) => {
@@ -50,6 +55,7 @@ export const updateOther = async (req, res) => {
     
     const updatedOther = await Other.findByIdAndUpdate(_id, info, { new: true });
 
-    res.json(updatedOther);
+    const token = jwt.sign({ email: updatedOther.email, id: updatedOther._id }, secret, { expiresIn: "1h" });
 
+    res.status(200).json({ result: updatedOther, token });
 }
