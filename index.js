@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/user.js";
-import mainRouter from "./routes/main.js";
 
 const app = express();
 dotenv.config();
