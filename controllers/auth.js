@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { Director, Player, Team, Other } from "../models/users.js";
+import { Director, Player, Team, Other, Admin } from "../models/users.js";
 import { secret } from "../secret.js";
 
 export const signin = async (req, res) => {
@@ -131,6 +131,30 @@ export const otherSignUp = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12);
 
         const result = await Other.create({ active, role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword });
+
+        const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
+
+        res.status(200).json({ result, token });
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong!"});
+    }
+};
+
+export const adminSignUp = async (req, res) => {
+    const {
+        role, userName, firstName, lastName, email, phoneNumber, password, passwordConfirm, agreeBtn
+    } = req.body;
+    console.log(req.body)
+    try {
+        const existingAdmin = await Admin.findOne({ email });
+
+        if (existingAdmin) return res.status(400).json({ message: "User already exists."});
+
+        if (password !== passwordConfirm) return res.status(400).json({ message: "Passwords don't match" });
+
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        const result = await Admin.create({ role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 

@@ -8,5 +8,7 @@ router.post('/dir_signup', directorSignUp);
 router.post('/team_signup', teamSignUp);
 router.post('/player_signup', playerSignUp);
 router.post('/other_signup', otherSignUp);
+router.post('/admin_signup', adminSignUp);
+
 
 export default router;

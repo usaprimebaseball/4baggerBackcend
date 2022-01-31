@@ -282,9 +282,45 @@ const otherSchema = new mongoose.Schema({
     }
 });
 
+const otherSchema = new mongoose.Schema({
+    active: {
+        type: Boolean,
+        required: true
+    },
+    role: {
+       type: String,
+        required: true,
+    },
+    firstName: {
+       type: String,
+        required: true,
+    },
+    lastName: {
+       type: String,
+        required: true,
+    },
+    email: {
+       type: String,
+        required: true
+    },
+    phoneNumber: {
+       type: Number,
+        required: true
+    },
+    password: {
+       type: String,
+        required: true
+    },
+    id: {
+        type: String
+    }
+});
+
 
 export const Director = mongoose.model("Director", directorSchema, "users");
 export const Player = mongoose.model("Player", playerSchema, "users");
 export const Team = mongoose.model("Team", teamSchema, "users");
 export const Other = mongoose.model("Other", otherSchema, "users");
+export const Admin = mongoose.model("Admin", adminSchema, "users");
+
 
