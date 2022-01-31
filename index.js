@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/user.js";
+import mainRouter from "./routes/main.js";
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
+app.use("/", mainRouter);
 app.use("/auth", authRouter);
 app.use("/account", userRouter);
 
