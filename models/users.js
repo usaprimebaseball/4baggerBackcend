@@ -283,10 +283,6 @@ const otherSchema = new mongoose.Schema({
 });
 
 const adminSchema = new mongoose.Schema({
-    active: {
-        type: Boolean,
-        required: true
-    },
     role: {
        type: String,
         required: true,
