@@ -13,10 +13,10 @@ dotenv.config();
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
-app.use("/", (req, res) => {
+app.use("/auth", (req, res) => {
   res.send("Welcome to 4Bagger Backend");
 });
-app.use("/auth", authRouter);
+app.use("/", authRouter);
 app.use("/account", userRouter);
 
 const PORT = process.env.PORT|| 5000;
