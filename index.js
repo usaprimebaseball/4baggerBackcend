@@ -15,7 +15,6 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 
-app.use("/", mainRouter);
 app.use("/auth", authRouter);
 app.use("/account", userRouter);
 
@@ -25,3 +24,4 @@ mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnified
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`)))
   .catch((error) => console.log(`${error} did not connect`));
 
+mongoose.set('useFindAndModify', false);
