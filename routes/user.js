@@ -1,7 +1,11 @@
 import express from "express";
 
-import { updateDirector, updatePlayer, updateTeam, updateOther, updateAdmin } from "../controllers/user.js";
+import { updateDirector, updatePlayer, updateTeam, updateOther, updateAdmin, getUsers, getUser } from "../controllers/user.js";
 const router = express.Router();
+
+router.get('/admin/users', getUsers);
+
+router.get('/admin/users/:id', getUser);
 
 router.patch('/director/:id', updateDirector);
 

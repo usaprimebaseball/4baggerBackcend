@@ -317,6 +317,6 @@ export const Director = mongoose.model("Director", directorSchema, "users");
 export const Player = mongoose.model("Player", playerSchema, "users");
 export const Team = mongoose.model("Team", teamSchema, "users");
 export const Other = mongoose.model("Other", otherSchema, "users");
-export const Admin = mongoose.model("Admin", adminSchema, "users");
+export const Admin = mongoose.model("Admin", adminSchema, "admins");
 
 

@@ -25,6 +25,27 @@ export const signin = async (req, res) => {
     }
 };
 
+export const adminSignin = async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const existingUser = await Admin.findOne({ email });
+        // Check for Existing Users
+        if (!existingUser) return res.status(404).json({ message: "Admin doesn't exist."})
+
+        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+
+        if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
+
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, secret, { expiresIn: "1h" });
+
+        res.status(200).json({ result: existingUser, token });
+
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong!"});
+    }
+};
+
 export const directorSignUp = async (req, res) => {
     const {
         active, role, firstName, lastName, email, phoneNumber, companyName, taxId,

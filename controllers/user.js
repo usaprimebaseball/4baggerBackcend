@@ -3,6 +3,28 @@ import jwt from "jsonwebtoken";
 import { secret } from "../secret.js";
 import { Director, Player, Team, Other, Admin } from "../models/users.js";
 
+export const getUsers = async (req, res) => { 
+    try {
+        const users = await Director.find();
+                
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getUser = async (req, res) => { 
+    const { id } = req.params;
+
+    try {
+        const user = await Director.findById(id);
+        
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
 export const updateDirector = async (req, res) => {
 
     const { id: _id } = req.params;
@@ -16,7 +38,7 @@ export const updateDirector = async (req, res) => {
 
     res.status(200).json({ result: updatedDirector, token });
 
-}
+};
 
 export const updatePlayer = async (req, res) => {
 
@@ -30,7 +52,7 @@ export const updatePlayer = async (req, res) => {
     const token = jwt.sign({ email: updatedPlayer.email, id: updatedPlayer._id }, secret, { expiresIn: "1h" });
 
     res.status(200).json({ result: updatedPlayer, token });
-}
+};
 
 export const updateTeam = async (req, res) => {
 
@@ -44,7 +66,7 @@ export const updateTeam = async (req, res) => {
     const token = jwt.sign({ email: updatedTeam.email, id: updatedTeam._id }, secret, { expiresIn: "1h" });
 
     res.status(200).json({ result: updatedTeam, token });
-}
+};
 
 export const updateOther = async (req, res) => {
 
@@ -58,7 +80,7 @@ export const updateOther = async (req, res) => {
     const token = jwt.sign({ email: updatedOther.email, id: updatedOther._id }, secret, { expiresIn: "1h" });
 
     res.status(200).json({ result: updatedOther, token });
-}
+};
 
 export const updateAdmin = async (req, res) => {
 
@@ -72,4 +94,4 @@ export const updateAdmin = async (req, res) => {
     const token = jwt.sign({ email: updatedOther.email, id: updatedOther._id }, secret, { expiresIn: "1h" });
 
     res.status(200).json({ result: updatedOther, token });
-}
+};
