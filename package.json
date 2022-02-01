@@ -1,13 +1,13 @@
 {
   "main": "index.js",
   "type": "module",
-  
   "scripts": {
     "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@heroku-cli/command": "^8.5.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
