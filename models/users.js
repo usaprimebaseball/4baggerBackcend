@@ -83,6 +83,10 @@ const directorSchema = new mongoose.Schema({
        type: String,
         required: true
     },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
     id: {
         type: String
     }
@@ -192,6 +196,10 @@ const playerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
     id: {
         type: String
     }
@@ -238,6 +246,10 @@ const teamSchema = new mongoose.Schema({
     password: {
         type: String
     },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
     id: {
         type: String
     }
@@ -277,6 +289,10 @@ const otherSchema = new mongoose.Schema({
        type: String,
         required: true
     },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
     id: {
         type: String
     }
@@ -306,6 +322,10 @@ const adminSchema = new mongoose.Schema({
     password: {
        type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        default: new Date(),
     },
     id: {
         type: String

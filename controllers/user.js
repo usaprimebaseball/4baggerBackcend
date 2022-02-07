@@ -23,55 +23,17 @@ export const getUser = async (req, res) => {
     }
 };
 
-export const updateDirector = async (req, res) => {
+export const updateUser = async (req, res) => {
 
     const { id: _id } = req.params;
     const info = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
 
-    const updatedDirector = await Director.findByIdAndUpdate(_id, info, { new: true });
+    const updatedUser = await Director.findByIdAndUpdate(_id, info, { new: true });
 
+    res.status(200).json({ result: updatedUser });
 
-    res.status(200).json({ result: updatedDirector });
-
-};
-
-export const updatePlayer = async (req, res) => {
-
-    const { id: _id } = req.params;
-    const info = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
-    
-    const updatedPlayer = await Player.findByIdAndUpdate(_id, info, { new: true });
-
-
-    res.status(200).json({ result: updatedPlayer });
-};
-
-export const updateTeam = async (req, res) => {
-
-    const { id: _id } = req.params;
-    const info = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
-    
-    const updatedTeam = await Team.findByIdAndUpdate(_id, info, { new: true });
-
-    res.status(200).json({ result: updatedTeam });
-};
-
-export const updateOther = async (req, res) => {
-
-    const { id: _id } = req.params;
-    const info = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
-    
-    const updatedOther = await Other.findByIdAndUpdate(_id, info, { new: true });
-
-    res.status(200).json({ result: updatedOther });
 };
 
 export const updateAdmin = async (req, res) => {
@@ -81,19 +43,7 @@ export const updateAdmin = async (req, res) => {
 
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
     
-    const updatedOther = await Admin.findByIdAndUpdate(_id, info, { new: true });
+    const updatedAdmin = await Admin.findByIdAndUpdate(_id, info, { new: true });
 
-    res.status(200).json({ result: updatedOther });
-};
-
-export const updateActivity = async (req, res) => {
-
-    const { id: _id } = req.params;
-    const info = req.body;
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
-    
-    const updatedUser = await Director.findByIdAndUpdate(_id, info, { new: true });
-
-    res.status(200).json({ result: updatedUser });
+    res.status(200).json({ result: updatedAdmin });
 };

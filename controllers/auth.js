@@ -68,7 +68,8 @@ export const directorSignUp = async (req, res) => {
 
         const result = await Director.create({ active, role, firstName, lastName, email, phoneNumber, companyName, taxId,
             street, city, state, zipcode, checkingName, checkingNum,
-            routingNum, fieldComplexName, numOfFields, fieldComplexCity, fieldComplexState, password: hashedPassword
+            routingNum, fieldComplexName, numOfFields, fieldComplexCity, fieldComplexState, password: hashedPassword, 
+            createdAt: new Date().toISOString()
         });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
@@ -99,7 +100,7 @@ export const playerSignUp = async (req, res) => {
         const result = await Player.create({ active, role, profileImage, firstName, lastName, email, phoneNumber, highSchoolName,
             street, city, state, zipcode, dob, gradYear, collegeCommitment,
             height, weight , pThrow, bat, primPosition, seconPosition, parentFirst, parentLast, 
-            parentEmail, parentPhone, password: hashedPassword
+            parentEmail, parentPhone, password: hashedPassword, createdAt: new Date().toISOString()
         });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
@@ -127,7 +128,8 @@ export const teamSignUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await Team.create({ active, role, profileImage, teamName, firstName, lastName, email, phoneNumber, city, state, ageGroup, division, password: hashedPassword });
+        const result = await Team.create({ active, role, profileImage, teamName, firstName, lastName, email, phoneNumber, city, state, ageGroup, division, password: hashedPassword,
+            createdAt: new Date().toISOString() });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 
@@ -151,7 +153,8 @@ export const otherSignUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await Other.create({ active, role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword });
+        const result = await Other.create({ active, role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword,
+            createdAt: new Date().toISOString() });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 
@@ -175,7 +178,8 @@ export const adminSignUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await Admin.create({ role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword });
+        const result = await Admin.create({ role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword,
+            createdAt: new Date().toISOString() });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 

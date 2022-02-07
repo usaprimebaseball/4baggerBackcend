@@ -1,22 +1,15 @@
 import express from "express";
 
-import { updateDirector, updatePlayer, updateTeam, updateOther, updateAdmin, getUsers, getUser, updateActivity } from "../controllers/user.js";
+import { updateUser, getUsers, getUser, updateAdmin } from "../controllers/user.js";
 const router = express.Router();
 
 router.get('/admin/users', getUsers);
 
 router.get('/admin/users/:id', getUser);
 
-router.patch('/:role/:id/activity', updateActivity);
-
-router.patch('/director/:id', updateDirector);
-
-router.patch('/player/:id', updatePlayer);
-
-router.patch('/team/:id', updateTeam);
-
-router.patch('/user/:id', updateOther);
+router.patch('/:role/:id', updateUser);
 
 router.patch('/admin/:id', updateAdmin);
+
 
 export default router;
