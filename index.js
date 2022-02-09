@@ -23,7 +23,6 @@ app.use("/account", userRouter);
 
 
 const PORT = process.env.PORT|| 5000;
-const CONNECTION_URL = "mongodb+srv://4bagger:usaprime@cluster0.usrwb.mongodb.net/users?retryWrites=true&w=majority"
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: ${PORT}`)))
