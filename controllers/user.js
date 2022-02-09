@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Director, Player, Team, Other, Admin } from "../models/users.js";
+import { Director, Admin } from "../models/users.js";
 
 export const getUsers = async (req, res) => { 
     try {
@@ -40,7 +40,7 @@ export const updateAdmin = async (req, res) => {
 
     const { id: _id } = req.params;
     const info = req.body;
-
+    
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('Not valid user');
     
     const updatedAdmin = await Admin.findByIdAndUpdate(_id, info, { new: true });

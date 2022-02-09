@@ -55,6 +55,10 @@ const eventSchema = mongoose.Schema({
         type: String,
          required: true
      },
+     gameFormat: {
+        type: String,
+        required: true
+     },
      createdAt: {
         type: Date,
         default: new Date(),

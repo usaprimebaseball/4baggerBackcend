@@ -14,7 +14,7 @@ export const signin = async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
-        if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
+        if (!isPasswordCorrect) return res.status(400).json({ message: "Wrong Password."})
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, secret, { expiresIn: "1h" });
 
@@ -35,7 +35,7 @@ export const adminSignin = async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
-        if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid Credentials."})
+        if (!isPasswordCorrect) return res.status(400).json({ message: "Wrong Password."})
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, secret, { expiresIn: "1h" });
 
@@ -54,7 +54,7 @@ export const directorSignUp = async (req, res) => {
     } = req.body;
 
     try {
-        const existingDirector = await Director.findOne({ email });
+        const existingDirector = await Director.findOne({ email }) || await Admin.findOne({ email });
 
         if (existingDirector) return res.status(400).json({ message: "User already exists."});
 
@@ -89,7 +89,7 @@ export const playerSignUp = async (req, res) => {
     } = req.body;
     
     try {
-        const existingPlayer = await Player.findOne({ email });
+        const existingPlayer = await Player.findOne({ email }) || await Admin.findOne({ email });
 
         if (existingPlayer) return res.status(400).json({ message: "User already exists."});
 
@@ -120,7 +120,7 @@ export const teamSignUp = async (req, res) => {
     } = req.body;
     
     try {
-        const existingTeam = await Team.findOne({ email });
+        const existingTeam = await Team.findOne({ email }) || await Admin.findOne({ email });
 
         if (existingTeam) return res.status(400).json({ message: "User already exists."});
 
@@ -145,7 +145,7 @@ export const otherSignUp = async (req, res) => {
     } = req.body;
     console.log(req.body)
     try {
-        const existingOther = await Other.findOne({ email });
+        const existingOther = await Other.findOne({ email }) || await Admin.findOne({ email });
 
         if (existingOther) return res.status(400).json({ message: "User already exists."});
 
@@ -170,7 +170,7 @@ export const adminSignUp = async (req, res) => {
     } = req.body;
     console.log(req.body)
     try {
-        const existingAdmin = await Admin.findOne({ email });
+        const existingAdmin = await Admin.findOne({ email }) || await Director.findOne({ email });
 
         if (existingAdmin) return res.status(400).json({ message: "User already exists."});
 
