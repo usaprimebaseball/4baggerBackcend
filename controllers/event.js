@@ -2,7 +2,7 @@ import Event from "../models/events.js";
 
 export const createEvent = async (req, res) => {
     const event = req.body;
-    const newEvent = new Event({ ...event, createdAt: new Date().toISOString() })
+    const newEvent = new Event({ ...event, createdAt: new Date().toISOString().slice(0, 10) })
 
     try {
         await newEvent.save();

@@ -59,6 +59,14 @@ const eventSchema = mongoose.Schema({
         type: String,
         required: true
      },
+     gateFee: {
+        type: String,
+        required: true
+     },
+     entryFee: {
+        type: String,
+        required: true
+     },
      createdAt: {
         type: Date,
         default: new Date(),
