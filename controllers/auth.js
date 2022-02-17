@@ -69,7 +69,7 @@ export const directorSignUp = async (req, res) => {
         const result = await Director.create({ active, role, firstName, lastName, email, phoneNumber, companyName, taxId,
             street, city, state, zipcode, checkingName, checkingNum,
             routingNum, fieldComplexName, numOfFields, fieldComplexCity, fieldComplexState, password: hashedPassword, 
-            createdAt: new Date().toISOString().slice(0, 10)
+            createdAt: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
         });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
@@ -100,7 +100,7 @@ export const playerSignUp = async (req, res) => {
         const result = await Player.create({ active, role, profileImage, firstName, lastName, email, phoneNumber, highSchoolName,
             street, city, state, zipcode, dob: dob.slice(0, 10), gradYear, collegeCommitment,
             height, weight , pThrow, bat, primPosition, seconPosition, parentFirst, parentLast, 
-            parentEmail, parentPhone, password: hashedPassword, createdAt: new Date().toISOString().slice(0, 10)
+            parentEmail, parentPhone, password: hashedPassword, createdAt: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
         });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
@@ -154,7 +154,7 @@ export const otherSignUp = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12);
 
         const result = await Other.create({ active, role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword,
-            createdAt: new Date().toISOString().slice(0, 10) });
+            createdAt: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '') });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 
@@ -179,7 +179,7 @@ export const adminSignUp = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12);
 
         const result = await Admin.create({ role, userName, firstName, lastName, email, phoneNumber, password: hashedPassword,
-            createdAt: new Date().toISOString().slice(0, 10) });
+            createdAt: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '') });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 
