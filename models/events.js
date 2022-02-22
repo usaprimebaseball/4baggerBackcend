@@ -60,11 +60,11 @@ const eventSchema = mongoose.Schema({
         required: true
      },
      gateFee: {
-        type: String,
+        type: Number,
         required: true
      },
      entryFee: {
-        type: String,
+        type: Number,
         required: true
      },
      createdAt: {
@@ -72,7 +72,7 @@ const eventSchema = mongoose.Schema({
         default: new Date(),
     },
     eventImage: {
-        type :String,
+        type : String,
         required: true
     },
     id: {

@@ -27,9 +27,9 @@ export const getEvent = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const user = await Event.findById(id);
+        const event = await Event.findById(id);
         
-        res.status(200).json(user);
+        res.status(200).json(event);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

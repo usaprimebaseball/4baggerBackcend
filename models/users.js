@@ -7,6 +7,10 @@ const directorSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    agreeBtn: {
+        type: Boolean,
+        required: false
+    },
     role: {
        type: String,
         required: true
@@ -96,6 +100,10 @@ const playerSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         required: true
+    },
+    agreeBtn: {
+        type: Boolean,
+        required: false
     },
     role: {
         type: String,
@@ -210,6 +218,10 @@ const teamSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    agreeBtn: {
+        type: Boolean,
+        required: false
+    },
     role: {
         type: String
     },
@@ -261,6 +273,10 @@ const otherSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    agreeBtn: {
+        type: Boolean,
+        required: false
+    },
     role: {
        type: String,
         required: true,
@@ -302,6 +318,10 @@ const adminSchema = new mongoose.Schema({
     role: {
        type: String,
         required: true,
+    },
+    agreeBtn: {
+        type: Boolean,
+        required: false
     },
     firstName: {
        type: String,
