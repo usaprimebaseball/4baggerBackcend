@@ -75,6 +75,13 @@ const eventSchema = mongoose.Schema({
         type : String,
         required: true
     },
+    teamsCount: {
+        type: Number,
+        required: true
+    },
+    teams: {
+        type: [Object]
+    },
     id: {
         type: String
     }

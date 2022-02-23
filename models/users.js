@@ -228,6 +228,9 @@ const teamSchema = new mongoose.Schema({
     profileImage: {
         type: String
     },
+    enrolled: {
+        type: [Object]
+    },
     teamName: {
         type: String
     },

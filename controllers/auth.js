@@ -128,7 +128,7 @@ export const teamSignUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await Team.create({ active, role, profileImage, teamName, firstName, lastName, email, phoneNumber, city, state, ageGroup, division, password: hashedPassword,
+        const result = await Team.create({ active, role, profileImage, teamName, firstName, lastName, enrolled, email, phoneNumber, city, state, ageGroup, division, password: hashedPassword,
             createdAt: new Date().toISOString().slice(0, 10) });
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });

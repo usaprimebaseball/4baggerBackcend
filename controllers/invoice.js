@@ -16,7 +16,6 @@ export const createTeamInvoice = async (req, res) => {
 export const getInvoices = async (req, res) => { 
     try {
         const invoices = await TeamInvoice.find();
-                
         res.status(200).json(invoices);
     } catch (error) {
         res.status(404).json({ message: error.message });
